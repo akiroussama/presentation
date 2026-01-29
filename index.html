@@ -1,144 +1,176 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jira Intelligence Platform - Product Overview</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&family=Outfit:wght@300;500;700&family=Fira+Code:wght@400;500;600&display=swap"
-        rel="stylesheet">
+    <title>Revision des Titres Miniers - Tunisie 2024</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <style>
         :root {
-            --bg-light: #ffffff;
-            --bg-gradient: #f8fafc;
-            --text-dark: #0f172a;
-            --text-secondary: #64748b;
-            --accent-blue: #2563eb;
-            --accent-purple: #7c3aed;
-            --accent-green: #10b981;
-            --accent-orange: #f59e0b;
-            --accent-red: #ef4444;
-            --accent-cyan: #06b6d4;
-            --brand-primary: #667eea;
-            --brand-secondary: #764ba2;
-            --glass-bg: rgba(255, 255, 255, 0.9);
-            --glass-border: rgba(15, 23, 42, 0.08);
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
-            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
+            /* Palette Sobre & Chic */
+            --bg-light: #fafafa;
+            --bg-white: #ffffff;
+            --text-dark: #1a1a2e;
+            --text-secondary: #6b7280;
+            --text-muted: #9ca3af;
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+            /* Couleurs principales - tons neutres et sophistiques */
+            --accent-blue: #4a5568;
+            --accent-purple: #6b5b7a;
+            --accent-green: #5a7a6b;
+            --accent-orange: #b8860b;
+            --accent-red: #a35454;
+            --accent-cyan: #5a8a8a;
+            --accent-indigo: #5c6a82;
 
+            /* Couleurs institutionnelles */
+            --mining-primary: #2c3e50;
+            --mining-secondary: #34495e;
+            --mining-accent: #7f8c8d;
+
+            /* Couleurs de statut - tons attenués */
+            --status-success: #6b8e6b;
+            --status-warning: #c9a227;
+            --status-error: #b07070;
+            --status-info: #6a8caf;
+
+            /* Surfaces et bordures */
+            --glass-border: rgba(0, 0, 0, 0.06);
+            --card-bg: #ffffff;
+            --card-border: #e5e7eb;
+
+            /* Ombres douces */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.1);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 18px; }
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg-light);
             color: var(--text-dark);
             overflow: hidden;
             height: 100vh;
+            font-size: 1rem;
+            -webkit-font-smoothing: antialiased;
         }
 
+        /* Background Design */
         .bg-gradient {
-            position: absolute;
+            position: fixed;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 50% 50%, #ffffff 0%, #f8fafc 100%);
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
             z-index: -2;
         }
-
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.15;
-            animation: float 20s infinite ease-in-out;
+        .bg-pattern {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(rgba(30, 58, 95, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: -1;
         }
+        .orb { position: fixed; border-radius: 50%; filter: blur(120px); opacity: 0.15; pointer-events: none; }
+        .orb-1 { width: 600px; height: 600px; background: linear-gradient(135deg, var(--mining-primary), var(--accent-blue)); top: -200px; left: -200px; }
+        .orb-2 { width: 500px; height: 500px; background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan)); bottom: -150px; right: -150px; }
+        .orb-3 { width: 400px; height: 400px; background: linear-gradient(135deg, var(--accent-purple), var(--accent-indigo)); top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.08; }
 
-        .orb-1 {
-            width: 400px;
-            height: 400px;
-            background: var(--brand-primary);
-            top: -100px;
-            left: -100px;
-        }
-
-        .orb-2 {
-            width: 500px;
-            height: 500px;
-            background: var(--accent-purple);
-            bottom: -150px;
-            right: -150px;
-            animation-delay: -7s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -50px) scale(1.1); }
-            66% { transform: translate(-20px, 30px) scale(0.9); }
-        }
-
+        /* Header */
         header {
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
+            padding: 0.5rem 2rem;
+            min-height: 100px;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
             align-items: center;
+            gap: 2rem;
             backdrop-filter: blur(20px);
-            background: rgba(255, 255, 255, 0.9);
-            border-bottom: 1px solid var(--glass-border);
-            box-shadow: var(--shadow-sm);
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(30, 58, 95, 0.08);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
             z-index: 100;
+            position: relative;
         }
-
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 0rem;
+        }
+        .ministry-logo {
+            height: 130px;
+            width: auto;
+            object-fit: contain;
+        }
+        .header-center {
+            text-align: center;
+        }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
         .logo {
             font-family: 'Outfit', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--brand-primary), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #2c3e50;
+            letter-spacing: -0.02em;
         }
-
-        .progress-container {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+        .logo-sub {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            display: block;
+            margin-top: 0.1rem;
         }
-
         .slide-counter {
             font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            min-width: 100px;
-            text-align: right;
+            font-size: 1.1rem;
+            color: var(--mining-primary);
+            font-weight: 700;
+            background: rgba(30, 58, 95, 0.06);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+        .doc-badge {
+            padding: 0.5rem 1rem;
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            color: #4a5568;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
         }
 
+        /* Progress Bar */
         .progress-bar {
-            width: 200px;
-            height: 6px;
-            background: var(--card-bg);
-            border-radius: 10px;
-            overflow: hidden;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: rgba(30, 58, 95, 0.1);
+            z-index: 200;
         }
-
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--brand-primary), var(--accent-purple));
+            background: linear-gradient(90deg, #2c3e50, #4a5568, #5a7a6b);
             width: 0%;
-            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+        /* Main & Slides */
         main {
             position: relative;
-            height: calc(100vh - 80px);
+            height: calc(100vh - 100px);
             overflow: hidden;
+            cursor: pointer;
         }
-
         .slide {
             position: absolute;
             top: 0;
@@ -146,1176 +178,1174 @@
             width: 100%;
             height: 100%;
             opacity: 0;
-            transform: translateX(100px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateX(80px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             pointer-events: none;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             padding: 2rem 4rem;
+            overflow-y: auto;
         }
+        .slide.active { opacity: 1; transform: translateX(0); pointer-events: all; }
+        .slide.prev { transform: translateX(-80px); opacity: 0; }
 
-        .slide.active {
-            opacity: 1;
-            transform: translateX(0);
-            pointer-events: all;
-        }
-
-        .slide.prev {
-            transform: translateX(-100px);
-            opacity: 0;
-        }
-
-        h1, h2, h3 {
-            font-family: 'Outfit', sans-serif;
-            letter-spacing: -0.02em;
-        }
-
+        /* Typography */
+        h1, h2, h3 { font-family: 'Outfit', sans-serif; letter-spacing: -0.02em; }
         .hero-title {
-            font-size: 4.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--brand-primary), var(--accent-purple));
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #2c3e50 0%, #4a5568 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
+            margin-bottom: 1rem;
             text-align: center;
+            line-height: 1.1;
         }
-
         .hero-subtitle {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--text-secondary);
             text-align: center;
-            max-width: 800px;
-            margin: 0 auto 3rem;
-            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto 2rem;
+            line-height: 1.5;
         }
 
         .slide-header {
             display: flex;
             align-items: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid var(--glass-border);
+            border-bottom: 2px solid var(--glass-border);
         }
-
         .section-badge {
             font-family: 'Fira Code', monospace;
             font-size: 0.75rem;
-            background: linear-gradient(135deg, var(--brand-primary), var(--accent-purple));
+            background: var(--mining-primary);
             color: white;
             padding: 0.4rem 0.8rem;
-            border-radius: 6px;
+            border-radius: 4px;
             margin-right: 1rem;
             font-weight: 600;
-            box-shadow: 0 10px 30px -10px rgba(102, 126, 234, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
-
+        .section-badge.context { background: #4a5568; }
+        .section-badge.docs { background: #5a7a6b; }
+        .section-badge.fiscal { background: #b8860b; }
+        .section-badge.capacites { background: #6b5b7a; }
+        .section-badge.modern { background: #5a8a8a; }
+        .section-badge.supprime { background: #a35454; }
+        .section-badge.impact { background: #5a7a6b; }
         .slide-title {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 700;
             color: var(--text-dark);
-            line-height: 1.2;
         }
 
-        .content-full {
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-        }
+        /* Layout */
+        .content-split { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; flex: 1; align-items: start; }
+        .content-full { width: 100%; flex: 1; }
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
 
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            max-width: 1400px;
-            margin: 0 auto;
-            align-items: start;
-        }
-
-        .content-single {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
+        /* Cards */
         .card {
-            background: var(--card-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            backdrop-filter: blur(10px);
-            box-shadow: var(--shadow-md);
-            transition: all 0.3s ease;
-            margin: 0.75rem 0;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 1.4rem;
+            transition: all 0.2s ease;
         }
-
         .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--brand-primary);
-            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.2);
+            border-color: #d1d5db;
+            box-shadow: var(--shadow-sm);
         }
-
-        .card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
         .card-title {
-            font-size: 1.25rem;
-            font-weight: 600;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
             margin-bottom: 0.5rem;
-            color: var(--text-dark);
+            color: #2c3e50;
         }
-
         .card-text {
-            color: var(--text-secondary);
+            color: #6b7280;
             line-height: 1.6;
+            font-size: 0.95rem;
         }
 
-        .grid-4 {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.25rem;
-            margin: 2rem 0;
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .feature-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .feature-list li {
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--glass-border);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .feature-list li:before {
-            content: '✓';
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 24px;
-            height: 24px;
-            background: var(--accent-green);
-            color: white;
-            border-radius: 50%;
-            flex-shrink: 0;
-            font-weight: bold;
-        }
-
-        .tip {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1));
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            border-radius: 12px;
-            padding: 1.25rem;
-            margin: 1.5rem 0;
-        }
-
-        .tip-title {
-            font-weight: 600;
-            color: var(--accent-green);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .info {
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(124, 58, 237, 0.1));
-            border: 1px solid rgba(37, 99, 235, 0.2);
-            border-radius: 12px;
-            padding: 1.25rem;
-            margin: 1.5rem 0;
-        }
-
-        .info-title {
-            font-weight: 600;
-            color: var(--accent-blue);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-            border: 1px solid rgba(102, 126, 234, 0.2);
-            border-radius: 12px;
-            padding: 1.25rem;
-            margin: 1.5rem 0;
-        }
-
-        .highlight-box-title {
-            font-weight: 600;
-            color: var(--brand-primary);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .text-center { text-align: center; }
-        .mb-2 { margin-bottom: 1rem; }
-        .mb-3 { margin-bottom: 1.5rem; }
-        .mb-4 { margin-bottom: 2rem; }
-        .mt-2 { margin-top: 1rem; }
-        .mt-3 { margin-top: 1.5rem; }
-        .mt-4 { margin-top: 2rem; }
-
+        /* Tables */
         table {
             width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
+            border-collapse: separate;
+            border-spacing: 0;
             background: var(--card-bg);
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: var(--shadow-md);
+            border: 1px solid #e5e7eb;
+            font-size: 0.95rem;
         }
-
         th {
-            background: linear-gradient(135deg, var(--brand-primary), var(--accent-purple));
-            color: white;
-            padding: 1rem;
+            background: #f9fafb;
+            color: #374151;
+            padding: 0.9rem 1.1rem;
             text-align: left;
             font-weight: 600;
-        }
-
-        td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        tr:last-child td { border-bottom: none; }
-        tr:hover td { background: rgba(102, 126, 234, 0.05); }
-
-        .highlight {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(37, 99, 235, 0.1));
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-weight: 600;
-            color: var(--brand-primary);
-        }
-
-        nav {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 1rem;
-            z-index: 200;
-        }
-
-        button {
-            font-family: 'Inter', sans-serif;
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            font-size: 1rem;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--brand-primary), var(--accent-purple));
-            color: white;
-            box-shadow: 0 10px 30px -10px rgba(102, 126, 234, 0.5);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 40px -10px rgba(102, 126, 234, 0.6);
-        }
-
-        .btn-secondary {
-            background: var(--card-bg);
-            color: var(--text-dark);
-            border: 1px solid var(--glass-border);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--brand-primary);
-            transform: translateY(-2px);
-        }
-
-        kbd {
-            background: var(--card-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 6px;
-            padding: 0.25rem 0.5rem;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .comparison {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .comparison-item {
-            background: var(--card-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 1.5rem;
-        }
-
-        .comparison-title {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: var(--shadow-md);
-        }
-
-        .stat-value {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--brand-primary), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1.2;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-        }
-
-        .persona-card {
-            background: var(--card-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 1.25rem;
-            box-shadow: var(--shadow-md);
-        }
-
-        .persona-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .persona-title {
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 0.25rem;
-        }
-
-        .persona-pages {
             font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            border-bottom: 1px solid #e5e7eb;
         }
+        td {
+            padding: 0.8rem 1.1rem;
+            border-bottom: 1px solid #f3f4f6;
+            color: #4b5563;
+        }
+        tr:last-child td { border-bottom: none; }
+        tr:nth-child(even) { background: #fafafa; }
+        tr:hover { background: #f5f5f5; }
 
-        .persona-benefit {
-            font-size: 0.9rem;
-            color: var(--brand-primary);
+        /* Metric Cards */
+        .metric-card {
+            background: white;
+            padding: 1.8rem 1.5rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+        .metric-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+        }
+        .metric-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #2c3e50;
+            line-height: 1;
+        }
+        .metric-value.green { color: #5a7a6b; }
+        .metric-value.orange { color: #b8860b; }
+        .metric-label {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
             font-weight: 500;
         }
 
-        strong { color: var(--brand-primary); }
+        /* Info Boxes - Style sobre */
+        .info-box {
+            background: #f8f9fa;
+            border: 1px solid #e5e7eb;
+            border-left: 3px solid #4a5568;
+            border-radius: 8px;
+            padding: 1.2rem 1.5rem;
+            margin: 0.8rem 0;
+        }
+        .info-box-title {
+            font-weight: 700;
+            color: #374151;
+            font-size: 1rem;
+            margin-bottom: 0.4rem;
+        }
+        .info-box p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
 
-        .page-card {
-            background: var(--card-bg);
-            border: 1px solid var(--glass-border);
+        .warning-box {
+            background: #fffbf0;
+            border: 1px solid #e5dcc8;
+            border-left: 3px solid #b8860b;
+            border-radius: 8px;
+            padding: 1.2rem 1.5rem;
+            margin: 0.8rem 0;
+        }
+        .warning-box-title { font-weight: 700; color: #92680a; font-size: 1rem; margin-bottom: 0.4rem; }
+        .warning-box p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
+
+        .critical-box {
+            background: #fdf7f7;
+            border: 1px solid #e5d5d5;
+            border-left: 3px solid #a35454;
+            border-radius: 8px;
+            padding: 1.2rem 1.5rem;
+            margin: 0.8rem 0;
+        }
+        .critical-box-title { font-weight: 700; color: #8b4545; font-size: 1rem; margin-bottom: 0.4rem; }
+        .critical-box p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
+
+        .success-box {
+            background: #f7faf8;
+            border: 1px solid #d5e5db;
+            border-left: 3px solid #5a7a6b;
+            border-radius: 8px;
+            padding: 1.2rem 1.5rem;
+            margin: 0.8rem 0;
+        }
+        .success-box-title { font-weight: 700; color: #4a6a5a; font-size: 1rem; margin-bottom: 0.4rem; }
+        .success-box p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
+
+        /* Charts */
+        .chart-container {
+            background: white;
             border-radius: 12px;
-            padding: 1rem;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s ease;
+            padding: 1.2rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            flex-direction: column;
+            height: fit-content;
         }
-
-        .page-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--brand-primary);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+        .chart-wrapper {
+            position: relative;
+            width: 100%;
         }
-
-        .page-icon {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+        /* Tailles standards par type de graphique */
+        .chart-wrapper.doughnut { height: 280px; }
+        .chart-wrapper.pie { height: 260px; }
+        .chart-wrapper.bar { height: 260px; }
+        .chart-wrapper.bar-horizontal { height: 180px; }
+        .chart-wrapper.radar { height: 280px; }
+        .chart-container canvas {
+            width: 100% !important;
+            height: 100% !important;
         }
-
-        .page-name {
-            font-weight: 600;
+        .chart-title {
+            font-family: 'Outfit', sans-serif;
             font-size: 0.95rem;
-            color: var(--text-dark);
-            margin-bottom: 0.25rem;
+            font-weight: 600;
+            color: var(--mining-primary);
+            margin-bottom: 0.8rem;
+            text-align: center;
+            letter-spacing: -0.01em;
         }
 
-        .page-desc {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            line-height: 1.4;
+        /* Feature List */
+        .feature-list { list-style: none; padding: 0; }
+        .feature-list li {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            font-size: 1.05rem;
+            line-height: 1.5;
+        }
+        .feature-list li:last-child { border-bottom: none; }
+        .feature-list li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #5a7a6b;
+            border-radius: 50%;
+            margin-top: 0.55rem;
+            flex-shrink: 0;
         }
 
-        .big-number {
-            font-size: 5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--brand-primary), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* Tags */
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+        .tag-blue { background: #f0f4f8; color: #4a5568; border: 1px solid #d1d5db; }
+        .tag-green { background: #f0f5f3; color: #5a7a6b; border: 1px solid #c8d6cf; }
+        .tag-orange { background: #fdf8ef; color: #92680a; border: 1px solid #e5d5b0; }
+        .tag-red { background: #faf5f5; color: #8b5555; border: 1px solid #dcc8c8; }
+        .tag-purple { background: #f7f5f9; color: #6b5b7a; border: 1px solid #d4cdd9; }
+
+        /* Sommaire */
+        .sommaire-container { display: flex; justify-content: center; align-items: center; height: 100%; padding: 2rem; }
+        .sommaire-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1200px; width: 100%; }
+        .sommaire-item {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--glass-border);
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .sommaire-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+        }
+        .sommaire-item .number {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: #2c3e50;
             line-height: 1;
         }
+        .sommaire-item .title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 0.6rem 0 0.3rem;
+        }
+        .sommaire-item .slides { font-size: 0.95rem; color: var(--text-secondary); }
+        .sommaire-item.context { border-color: #4a5568; }
+        .sommaire-item.context .number { color: #4a5568; }
+        .sommaire-item.docs { border-color: #5a7a6b; }
+        .sommaire-item.docs .number { color: #5a7a6b; }
+        .sommaire-item.fiscal { border-color: #b8860b; }
+        .sommaire-item.fiscal .number { color: #b8860b; }
+        .sommaire-item.capacites { border-color: #6b5b7a; }
+        .sommaire-item.capacites .number { color: #6b5b7a; }
+        .sommaire-item.modern { border-color: #5a8a8a; }
+        .sommaire-item.modern .number { color: #5a8a8a; }
+        .sommaire-item.impact { border-color: #5a7a6b; }
+        .sommaire-item.impact .number { color: #5a7a6b; }
+
+        /* Dataflow */
+        .dataflow-container { display: flex; align-items: center; justify-content: center; gap: 0.8rem; margin: 1.2rem 0; flex-wrap: wrap; }
+        .dataflow-box {
+            padding: 1rem 1.2rem;
+            background: #fafafa;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #374151;
+        }
+        .dataflow-box.highlight { border-color: #5a7a6b; background: #f7faf8; }
+        .dataflow-box.new { border-color: #6b5b7a; background: #f9f7fa; }
+        .dataflow-arrow { font-size: 1.5rem; color: #9ca3af; }
+
+        /* Icon Cards */
+        .icon-card { text-align: center; padding: 1.8rem; }
+        .icon-card .icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1rem;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-md);
+        }
+        .icon-card .icon svg { width: 36px; height: 36px; }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .slide.active .card { animation: fadeInUp 0.5s backwards; }
+        .slide.active .card:nth-child(1) { animation-delay: 0.1s; }
+        .slide.active .card:nth-child(2) { animation-delay: 0.2s; }
+        .slide.active .card:nth-child(3) { animation-delay: 0.3s; }
+        .slide.active .card:nth-child(4) { animation-delay: 0.4s; }
+        .slide.active .chart-container { animation: scaleIn 0.6s backwards; animation-delay: 0.2s; }
+        .slide.active .sommaire-item { animation: fadeInUp 0.5s backwards; }
+        .slide.active .sommaire-item:nth-child(1) { animation-delay: 0.1s; }
+        .slide.active .sommaire-item:nth-child(2) { animation-delay: 0.15s; }
+        .slide.active .sommaire-item:nth-child(3) { animation-delay: 0.2s; }
+        .slide.active .sommaire-item:nth-child(4) { animation-delay: 0.25s; }
+        .slide.active .sommaire-item:nth-child(5) { animation-delay: 0.3s; }
+        .slide.active .sommaire-item:nth-child(6) { animation-delay: 0.35s; }
+        .slide.active .metric-card { animation: scaleIn 0.4s backwards; }
+        .slide.active .metric-card:nth-child(1) { animation-delay: 0.1s; }
+        .slide.active .metric-card:nth-child(2) { animation-delay: 0.2s; }
+        .slide.active .metric-card:nth-child(3) { animation-delay: 0.3s; }
+        .slide.active .metric-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .text-center { text-align: center; }
+        .mb-1 { margin-bottom: 1rem; }
+        .mt-1 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1.5rem; }
+        .mt-2 { margin-top: 1.5rem; }
     </style>
 </head>
-
 <body>
     <div class="bg-gradient"></div>
+    <div class="bg-pattern"></div>
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
 
     <header>
-        <div class="logo">Jira Intelligence Platform</div>
-        <div class="progress-container">
-            <span class="slide-counter"><span id="current">1</span> / <span id="total">15</span></span>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progress"></div>
-            </div>
+        <div class="header-left">
+            <img src="logo.png" alt="Ministere de l'Industrie, des Mines et de l'Energie" class="ministry-logo">
+        </div>
+        <div class="header-center">
+            <div class="logo">Revision des Titres Miniers<span class="logo-sub">Analyse des Modifications - Decision 2004</span></div>
+        </div>
+        <div class="header-right">
+            <div class="slide-counter"><span id="current-slide">1</span> / <span id="total-slides">15</span></div>
+            <div class="doc-badge">Document de Travail</div>
         </div>
     </header>
 
     <main id="slides-container">
-        <!-- SLIDE 0: Hero -->
+
+        <!-- ===== SLIDE 1: HERO ===== -->
         <div class="slide active">
-            <div class="content-full text-center">
-                <h1 class="hero-title">Jira Intelligence<br/>Platform</h1>
-                <p class="hero-subtitle">
-                    Transform project management from reactive data analysis<br/>
-                    to proactive decision automation
-                </p>
-
-                <div class="grid-4 mt-4">
-                    <div class="stat-card">
-                        <div class="stat-value">3-6h</div>
-                        <div class="stat-label">Saved per manager per week</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value">90%</div>
-                        <div class="stat-label">Faster decisions</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value">2-3w</div>
-                        <div class="stat-label">Earlier risk detection</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value">50%</div>
-                        <div class="stat-label">Less status meetings</div>
-                    </div>
+            <div class="content-full text-center" style="display: flex; flex-direction: column; justify-content: center; height: 100%;">
+                <h1 class="hero-title">Revision de la Decision<br/><span style="font-size: 0.45em; font-weight: 600;">Modalites de Depot des Demandes de Titres Miniers</span></h1>
+                <p class="hero-subtitle">Analyse comparative des modifications proposees par rapport a la <strong>Decision de 2004</strong></p>
+                <div class="grid-4" style="max-width: 1000px; margin: 2rem auto;">
+                    <div class="metric-card"><div class="metric-value">16</div><div class="metric-label">Articles Revises</div></div>
+                    <div class="metric-card"><div class="metric-value green">5</div><div class="metric-label">Nouveaux Articles</div></div>
+                    <div class="metric-card"><div class="metric-value orange">1</div><div class="metric-label">Article Supprime</div></div>
+                    <div class="metric-card"><div class="metric-value">4</div><div class="metric-label">Titres (Sections)</div></div>
                 </div>
+                <div class="info-box" style="max-width: 800px; margin: 1.5rem auto;">
+                    <div class="info-box-title">Cadre Juridique</div>
+                    <p>Code Minier Tunisien - <strong>Loi n 2003-30</strong> du 28 avril 2003</p>
+                </div>
+                <div style="margin-top: 1.5rem; color: var(--text-secondary); font-size: 1rem;"><strong>Direction Generale des Mines</strong> | 2024</div>
+            </div>
+        </div>
 
-                <div class="tip mt-4">
-                    <div class="tip-title">The Core Promise</div>
-                    <p>Stop drowning in dashboards. Get answers to one question: <strong>"What should I do right now?"</strong></p>
+        <!-- ===== SLIDE 2: SOMMAIRE ===== -->
+        <div class="slide">
+            <div class="slide-header"><span class="section-badge">NAV</span><h2 class="slide-title">Sommaire - 15 Slides</h2></div>
+            <div class="sommaire-container">
+                <div class="sommaire-grid">
+                    <div class="sommaire-item context">
+                        <div class="number">1</div>
+                        <div class="title">Contexte Juridique</div>
+                        <div class="slides">Slides 3-4</div>
+                    </div>
+                    <div class="sommaire-item docs">
+                        <div class="number">2</div>
+                        <div class="title">Exigences Documentaires</div>
+                        <div class="slides">Slides 5-7</div>
+                    </div>
+                    <div class="sommaire-item fiscal">
+                        <div class="number">3</div>
+                        <div class="title">Obligations Fiscales</div>
+                        <div class="slides">Slides 8-9</div>
+                    </div>
+                    <div class="sommaire-item capacites">
+                        <div class="number">4</div>
+                        <div class="title">Capacites Tech/Fin</div>
+                        <div class="slides">Slides 10-11</div>
+                    </div>
+                    <div class="sommaire-item modern">
+                        <div class="number">5</div>
+                        <div class="title">Modernisation</div>
+                        <div class="slides">Slides 12-13</div>
+                    </div>
+                    <div class="sommaire-item impact">
+                        <div class="number">6</div>
+                        <div class="title">Impact & Recommandations</div>
+                        <div class="slides">Slides 14-15</div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 1: The Problem -->
+        <!-- ===== SLIDE 3: CONTEXTE JURIDIQUE ===== -->
         <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge">THE PROBLEM</span>
-                    <h2 class="slide-title">Why Traditional Dashboards Fail</h2>
-                </div>
-
-                <div class="comparison">
-                    <div class="comparison-item" style="border-color: var(--accent-red);">
-                        <div class="comparison-title" style="color: var(--accent-red);">Traditional Dashboards</div>
-                        <ul class="feature-list" style="list-style: none;">
-                            <li style="color: var(--text-secondary);">Shows data, requires interpretation</li>
-                            <li style="color: var(--text-secondary);">Reactive: see problems after they happen</li>
-                            <li style="color: var(--text-secondary);">Hours of analysis needed</li>
-                            <li style="color: var(--text-secondary);">One-size-fits-all views</li>
-                            <li style="color: var(--text-secondary);">Static reports, manual refresh</li>
-                        </ul>
+            <div class="slide-header"><span class="section-badge context">CONTEXTE</span><h2 class="slide-title">Cadre Juridique Actuel</h2></div>
+            <div class="content-split">
+                <div>
+                    <div class="card mb-1">
+                        <div class="card-title">Code Minier - Loi 2003-30</div>
+                        <p class="card-text">La decision de 2004 regit les modalites de depot des demandes de titres miniers. Elle s'inscrit dans le cadre du Code minier tunisien et definit les procedures administratives.</p>
                     </div>
-                    <div class="comparison-item" style="border-color: var(--accent-green);">
-                        <div class="comparison-title" style="color: var(--accent-green);">This Platform</div>
+                    <div class="card mb-1">
+                        <div class="card-title">Types de Titres Miniers</div>
                         <ul class="feature-list">
-                            <li>Shows <strong>what to do</strong>, provides recommendations</li>
-                            <li>Proactive: see problems <strong>before</strong> they happen</li>
-                            <li>Seconds to insight</li>
-                            <li>Role-specific, personalized views</li>
-                            <li>Real-time intelligence, auto-updated</li>
+                            <li><strong>Autorisation de prospection</strong> - Exploration preliminaire</li>
+                            <li><strong>Permis de recherche</strong> - Exploration approfondie</li>
+                            <li><strong>Concession d'exploitation</strong> - Extraction</li>
+                            <li><strong>Cession/Location</strong> - Transfert de droits</li>
                         </ul>
                     </div>
+                    <div class="info-box">
+                        <div class="info-box-title">6 Groupes de Substances Minerales</div>
+                        <p>Combustibles solides, liquides/gazeux, metalliques, sels, <strong>phosphates</strong>, roches monminerales</p>
+                    </div>
                 </div>
-
-                <div class="highlight-box mt-3">
-                    <div class="highlight-box-title">The Paradigm Shift</div>
-                    <p>From "here's your data, figure it out" to <strong>"here's what's happening and what you should do about it"</strong></p>
+                <div class="chart-container">
+                    <div class="chart-title">Repartition des Demandes par Type</div>
+                    <div class="chart-wrapper doughnut">
+                        <canvas id="chart-types"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 2: Executive Intelligence -->
+        <!-- ===== SLIDE 4: OBJECTIFS REVISION ===== -->
         <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge">EXECUTIVE INTELLIGENCE</span>
-                    <h2 class="slide-title">Leadership Visibility in Seconds</h2>
+            <div class="slide-header"><span class="section-badge context">CONTEXTE</span><h2 class="slide-title">Objectifs de la Revision</h2></div>
+            <div class="content-full">
+                <div class="grid-2">
+                    <div class="card icon-card">
+                        <div class="icon" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(99, 102, 241, 0.15));">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <div class="card-title">Securisation des Investissements</div>
+                        <p class="card-text">Exiger des preuves de capacites techniques et financieres pour reduire les titres dormants ou abandonnes prematurement.</p>
+                    </div>
+                    <div class="card icon-card">
+                        <div class="icon" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(251, 191, 36, 0.15));">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M2 7h20M7 3v4m10-4v4"/></svg>
+                        </div>
+                        <div class="card-title">Tracabilite Fiscale</div>
+                        <p class="card-text">Introduction systematique de l'identifiant fiscal et attestations de regularite pour garantir la perception des redevances minieres.</p>
+                    </div>
+                    <div class="card icon-card">
+                        <div class="icon" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(52, 211, 153, 0.15));">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                        </div>
+                        <div class="card-title">Modernisation Administrative</div>
+                        <p class="card-text">Passage aux cartes topographiques numeriques et copies electroniques pour faciliter le traitement et l'archivage des dossiers.</p>
+                    </div>
+                    <div class="card icon-card">
+                        <div class="icon" style="background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(167, 139, 250, 0.15));">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8m8 4H8m2-8H8"/></svg>
+                        </div>
+                        <div class="card-title">Clarification Juridique</div>
+                        <p class="card-text">Creation d'un article specifique sur les cas de nullite pour reduire l'ambiguite et prevenir les contentieux potentiels.</p>
+                    </div>
                 </div>
+            </div>
+        </div>
 
-                <p class="mb-3" style="color: var(--text-secondary); font-size: 1.1rem;">
-                    Executives get instant answers without asking "how's the project going?"
-                </p>
+        <!-- ===== SLIDE 5: DOCUMENTS PERMIS RECHERCHE ===== -->
+        <div class="slide">
+            <div class="slide-header"><span class="section-badge docs">DOCUMENTS</span><h2 class="slide-title">Permis de Recherche - Avant / Apres</h2></div>
+            <div class="content-split">
+                <div>
+                    <table>
+                        <tr><th>Document Requis</th><th>2004</th><th>Nouveau</th></tr>
+                        <tr><td>Statuts de la societe</td><td><span class="tag tag-green">Oui</span></td><td><span class="tag tag-green">Oui</span></td></tr>
+                        <tr><td>Liste des actionnaires</td><td><span class="tag tag-red">Non</span></td><td><span class="tag tag-purple">NOUVEAU</span></td></tr>
+                        <tr><td>Succursale Tunisie (etrangers)</td><td><span class="tag tag-red">Non</span></td><td><span class="tag tag-purple">NOUVEAU</span></td></tr>
+                        <tr><td>Carte identification fiscale</td><td><span class="tag tag-red">Non</span></td><td><span class="tag tag-purple">NOUVEAU</span></td></tr>
+                        <tr><td>Attestation situation fiscale</td><td><span class="tag tag-red">Non</span></td><td><span class="tag tag-purple">NOUVEAU</span></td></tr>
+                        <tr><td>Bilans financiers</td><td>1 an</td><td><strong>3 ans</strong></td></tr>
+                        <tr><td>Repere geodesique (6e groupe)</td><td><span class="tag tag-red">Non</span></td><td><span class="tag tag-purple">NOUVEAU</span></td></tr>
+                        <tr><td>Preuves capacites techniques</td><td><span class="tag tag-red">Non</span></td><td><span class="tag tag-purple">NOUVEAU</span></td></tr>
+                        <tr><td>Preuves capacites financieres</td><td><span class="tag tag-red">Non</span></td><td><span class="tag tag-purple">NOUVEAU</span></td></tr>
+                    </table>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Evolution du Nombre de Documents Requis</div>
+                    <div class="chart-wrapper bar">
+                        <canvas id="chart-docs"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <!-- ===== SLIDE 6: DOCUMENTS CONCESSIONS ===== -->
+        <div class="slide">
+            <div class="slide-header"><span class="section-badge docs">DOCUMENTS</span><h2 class="slide-title">Concessions d'Exploitation - Nouvelles Exigences</h2></div>
+            <div class="content-full">
+                <table>
+                    <tr><th>Nouveau Document Requis</th><th>Description</th><th>Impact</th></tr>
+                    <tr><td><strong>Liste des depenses de recherche</strong></td><td>Factures originales des travaux realises</td><td><span class="tag tag-orange">Eleve</span></td></tr>
+                    <tr><td><strong>Resultats de recherche vises</strong></td><td>Validation par un bureau d'etudes agree</td><td><span class="tag tag-orange">Eleve</span></td></tr>
+                    <tr><td><strong>Rapports d'analyses</strong></td><td>Analyses chimiques/mineralogiques par laboratoire agree</td><td><span class="tag tag-orange">Eleve</span></td></tr>
+                    <tr><td><strong>Copie electronique complete</strong></td><td>Ensemble du dossier en format numerique</td><td><span class="tag tag-green">Faible</span></td></tr>
+                    <tr><td><strong>Enquete fonciere</strong></td><td>Verification de la situation fonciere du site</td><td><span class="tag tag-blue">Modere</span></td></tr>
+                    <tr><td><strong>Modalites de commercialisation</strong></td><td>Donnees sur la vente et distribution du produit</td><td><span class="tag tag-blue">Modere</span></td></tr>
+                    <tr><td><strong>Plan de developpement vise</strong></td><td>Par bureau d'etudes ou expert specialise agree</td><td><span class="tag tag-orange">Eleve</span></td></tr>
+                </table>
+                <div class="warning-box mt-2">
+                    <div class="warning-box-title">Complexite Accrue</div>
+                    <p>Le passage de <strong>6 a 14 documents</strong> requis pour les concessions augmente significativement les delais et couts de constitution des dossiers pour les operateurs.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SLIDE 7: NOUVEAUX DOCUMENTS CLES ===== -->
+        <div class="slide">
+            <div class="slide-header"><span class="section-badge docs">DOCUMENTS</span><h2 class="slide-title">Focus sur les Nouveaux Documents Cles</h2></div>
+            <div class="content-full">
                 <div class="grid-3">
-                    <div class="page-card">
-                        <div class="page-icon">🏆</div>
-                        <div class="page-name">Executive Cockpit</div>
-                        <div class="page-desc">Traffic-light health indicators. One glance = full project status.</div>
+                    <div class="card">
+                        <div class="card-title" style="color: var(--accent-purple);">Liste des Actionnaires</div>
+                        <p class="card-text">Transparence capitalistique complete. Identification de tous les proprietaires de la societe demanderesse.</p>
+                        <div class="tag tag-purple mt-1">Transparence</div>
                     </div>
-                    <div class="page-card">
-                        <div class="page-icon">🚀</div>
-                        <div class="page-name">CEO Command Center</div>
-                        <div class="page-desc">Strategic helicopter view with organizational KPIs.</div>
+                    <div class="card">
+                        <div class="card-title" style="color: var(--accent-orange);">Attestation Fiscale</div>
+                        <p class="card-text">Preuve de regularite vis-a-vis de l'administration fiscale ET des caisses sociales (CNSS).</p>
+                        <div class="tag tag-orange mt-1">Fiscal</div>
                     </div>
-                    <div class="page-card">
-                        <div class="page-icon">📊</div>
-                        <div class="page-name">Project Overview</div>
-                        <div class="page-desc">Central hub aggregating all critical metrics.</div>
+                    <div class="card">
+                        <div class="card-title" style="color: var(--accent-blue);">Bilans sur 3 Ans</div>
+                        <p class="card-text">Extension de 1 a 3 annees pour evaluer la solidite financiere sur le moyen terme.</p>
+                        <div class="tag tag-blue mt-1">Financier</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title" style="color: var(--accent-green);">Repere Geodesique</div>
+                        <p class="card-text">Office de la Topographie et du Cadastre. Obligatoire pour le 6eme groupe (roches monminerales).</p>
+                        <div class="tag tag-green mt-1">Technique</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title" style="color: var(--accent-cyan);">Copie Electronique</div>
+                        <p class="card-text">Numerisation complete du dossier pour archivage moderne et partage entre services.</p>
+                        <div class="tag tag-blue mt-1">Modernisation</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title" style="color: var(--accent-red);">Enquete Fonciere</div>
+                        <p class="card-text">Verification de la situation fonciere du site avant octroi de la concession d'exploitation.</p>
+                        <div class="tag tag-red mt-1">Juridique</div>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <div class="info mt-3">
-                    <div class="info-title">Value for Leadership</div>
+        <!-- ===== SLIDE 8: OBLIGATIONS FISCALES ===== -->
+        <div class="slide">
+            <div class="slide-header"><span class="section-badge fiscal">FISCAL</span><h2 class="slide-title">Nouvelles Obligations Fiscales</h2></div>
+            <div class="content-split">
+                <div>
+                    <table>
+                        <tr><th>Nouvelle Exigence</th><th>Impact</th></tr>
+                        <tr><td><strong>Carte d'identification fiscale</strong></td><td>Identification unique de l'operateur</td></tr>
+                        <tr><td><strong>Registre National des Entreprises</strong></td><td>Verification de l'existence legale</td></tr>
+                        <tr><td><strong>Attestation situation fiscale</strong></td><td>Garantie d'absence de dettes fiscales</td></tr>
+                        <tr><td><strong>Regularite caisses sociales</strong></td><td>CNSS a jour obligatoire</td></tr>
+                        <tr><td><strong>Identifiant dans les decisions</strong></td><td>Tracabilite des actes administratifs</td></tr>
+                    </table>
+                    <div class="success-box mt-1">
+                        <div class="success-box-title">Benefice pour l'Etat</div>
+                        <p>Meilleur suivi des operateurs et garantie de perception effective des redevances minieres dues.</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="card-title mb-1">Flux de Verification Fiscale</div>
+                    <div class="dataflow-container" style="flex-direction: column;">
+                        <div class="dataflow-box" style="width: 100%;">Demandeur</div>
+                        <span class="dataflow-arrow">&#8595;</span>
+                        <div class="dataflow-box new" style="width: 100%;">Identification Fiscale</div>
+                        <span class="dataflow-arrow">&#8595;</span>
+                        <div class="dataflow-box new" style="width: 100%;">Attestation DGI</div>
+                        <span class="dataflow-arrow">&#8595;</span>
+                        <div class="dataflow-box new" style="width: 100%;">Attestation CNSS</div>
+                        <span class="dataflow-arrow">&#8595;</span>
+                        <div class="dataflow-box highlight" style="width: 100%;">Dossier Complet</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SLIDE 9: NON-REDEVABILITE ===== -->
+        <div class="slide">
+            <div class="slide-header"><span class="section-badge fiscal">FISCAL</span><h2 class="slide-title">Condition de Non-Redevabilite</h2></div>
+            <div class="content-full">
+                <div class="critical-box" style="padding: 1.5rem;">
+                    <div class="critical-box-title" style="font-size: 1.3rem;">Nouvelle Condition Majeure</div>
+                    <p style="font-size: 1.15rem; margin-top: 0.8rem; line-height: 1.6;"><strong>"Le demandeur ne doit pas etre redevable de sommes dues a l'Etat au titre d'autres titres miniers (redevances fixes ou redevances minieres)."</strong></p>
+                </div>
+                <div class="grid-2 mt-2">
+                    <div class="card">
+                        <div class="card-title" style="color: var(--accent-green);">Objectifs de cette Mesure</div>
+                        <ul class="feature-list">
+                            <li>Eviter que des operateurs en defaut obtiennent de nouveaux titres</li>
+                            <li>Assainir le portefeuille national des titres miniers</li>
+                            <li>Garantir le paiement effectif des redevances</li>
+                            <li>Responsabiliser les operateurs du secteur</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="card-title" style="color: var(--accent-orange);">Impact sur les Operateurs</div>
+                        <ul class="feature-list">
+                            <li>Regularisation obligatoire avant toute nouvelle demande</li>
+                            <li>Blocage potentiel des projets en cours de developpement</li>
+                            <li>Necessite d'un audit interne prealable</li>
+                            <li>Delais supplementaires possibles</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="info-box mt-2">
+                    <div class="info-box-title">Champ d'Application</div>
+                    <p>Cette condition s'applique aux <strong>permis de recherche</strong> ET aux <strong>concessions d'exploitation</strong>.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SLIDE 10: CAPACITES TECHNIQUES ===== -->
+        <div class="slide">
+            <div class="slide-header"><span class="section-badge capacites">CAPACITES</span><h2 class="slide-title">Exigences de Capacites Techniques</h2></div>
+            <div class="content-split">
+                <div>
+                    <div class="card mb-1">
+                        <div class="card-title">Nouvelles Exigences Formalisees</div>
+                        <p class="card-text">Pour la premiere fois, la decision exige explicitement des preuves de capacites techniques, auparavant laissees a l'appreciation discretionnaire de l'administration.</p>
+                    </div>
                     <ul class="feature-list">
-                        <li>No more "status update" meetings - information is always available</li>
-                        <li>Instant risk visibility across all projects</li>
-                        <li>Data-driven decisions without waiting for reports</li>
+                        <li><strong>Equipe interne qualifiee</strong> - Competences specialisees en domaine minier</li>
+                        <li><strong>Convention avec bureau d'etudes</strong> - Alternative pour externalisation</li>
+                        <li><strong>Expert patente</strong> - Experience pertinente documentee</li>
+                        <li><strong>Liste de l'equipe technique</strong> - Adaptee au projet (concessions)</li>
                     </ul>
                 </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 3: Sprint & Delivery -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge">SPRINT & DELIVERY</span>
-                    <h2 class="slide-title">Stop Guessing Delivery Dates</h2>
-                </div>
-
-                <p class="mb-3" style="color: var(--text-secondary); font-size: 1.1rem;">
-                    Know your delivery dates with confidence levels, not hope.
-                </p>
-
-                <div class="grid-4">
-                    <div class="page-card">
-                        <div class="page-icon">🏃</div>
-                        <div class="page-name">Sprint Health</div>
-                        <div class="page-desc">Velocity tracking & burndown charts</div>
+                <div>
+                    <div class="card-title mb-1">3 Options pour Prouver les Capacites</div>
+                    <div class="card mb-1" style="border-left: 4px solid var(--accent-green);">
+                        <div class="card-title" style="color: var(--accent-green);">Option 1 : Equipe Interne</div>
+                        <p class="card-text">Disposer de competences techniques specialisees dans le domaine minier au sein de l'equipe de travail de l'entreprise.</p>
                     </div>
-                    <div class="page-card">
-                        <div class="page-icon">📋</div>
-                        <div class="page-name">Kanban Board</div>
-                        <div class="page-desc">Visual workflow, spot bottlenecks</div>
+                    <div class="card mb-1" style="border-left: 4px solid var(--accent-blue);">
+                        <div class="card-title" style="color: var(--accent-blue);">Option 2 : Bureau d'Etudes</div>
+                        <p class="card-text">Conclure une convention avec un bureau d'etudes specialise et agree par l'administration.</p>
                     </div>
-                    <div class="page-card">
-                        <div class="page-icon">🎲</div>
-                        <div class="page-name">Delivery Forecast</div>
-                        <div class="page-desc">Monte Carlo: "85% chance by March 15"</div>
-                    </div>
-                    <div class="page-card">
-                        <div class="page-icon">⏱️</div>
-                        <div class="page-name">Scope Negotiator</div>
-                        <div class="page-desc">"What if" timeline simulator</div>
-                    </div>
-                </div>
-
-                <div class="tip mt-3">
-                    <div class="tip-title">The Game Changer</div>
-                    <p><strong>Scope Negotiator</strong> shows the timeline impact of adding/removing scope in real-time.
-                    Product Managers can negotiate with stakeholders using data, not opinions.</p>
-                </div>
-
-                <div class="highlight-box">
-                    <div class="highlight-box-title">Instead of saying...</div>
-                    <p>"We'll try to deliver by end of month" → <strong>"We have 85% confidence for March 15, or 95% confidence for March 22"</strong></p>
-                </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 4: Team & People -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge">TEAM & PEOPLE</span>
-                    <h2 class="slide-title">Protect Your People, Optimize Your Teams</h2>
-                </div>
-
-                <p class="mb-3" style="color: var(--text-secondary); font-size: 1.1rem;">
-                    Never be surprised by a resignation. Spot burnout before it happens.
-                </p>
-
-                <div class="grid-4">
-                    <div class="page-card">
-                        <div class="page-icon">👥</div>
-                        <div class="page-name">Team Workload</div>
-                        <div class="page-desc">Capacity planning, prevent overload</div>
-                    </div>
-                    <div class="page-card">
-                        <div class="page-icon">🕯️</div>
-                        <div class="page-name">Burnout Barometer</div>
-                        <div class="page-desc">Early warning for at-risk members</div>
-                    </div>
-                    <div class="page-card">
-                        <div class="page-icon">👤</div>
-                        <div class="page-name">One-on-One Hub</div>
-                        <div class="page-desc">Auto-generated meeting agendas</div>
-                    </div>
-                    <div class="page-card">
-                        <div class="page-icon">💫</div>
-                        <div class="page-name">Relationship Pulse</div>
-                        <div class="page-desc">Who works well together?</div>
-                    </div>
-                </div>
-
-                <div class="grid-2 mt-3">
-                    <div class="info">
-                        <div class="info-title">One-on-One Hub Impact</div>
-                        <p>Saves <strong>4-8 hours per week</strong> on meeting preparation. Auto-generates agendas with performance data, ensuring consistent quality meetings.</p>
-                    </div>
-                    <div class="tip">
-                        <div class="tip-title">Burnout Detection</div>
-                        <p>Identifies behavioral anomalies <strong>2-3 weeks before</strong> visible signs. Enables preventive interventions, not reactive responses.</p>
+                    <div class="card" style="border-left: 4px solid var(--accent-purple);">
+                        <div class="card-title" style="color: var(--accent-purple);">Option 3 : Expert Patente</div>
+                        <p class="card-text">Engager un expert technique patente ayant une experience pertinente et documentee dans le secteur.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 5: Risk & Blocker -->
+        <!-- ===== SLIDE 11: CAPACITES FINANCIERES ===== -->
         <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge">RISK & BLOCKERS</span>
-                    <h2 class="slide-title">Cut Firefighting Time by 50%</h2>
-                </div>
-
-                <p class="mb-3" style="color: var(--text-secondary); font-size: 1.1rem;">
-                    Know the blast radius before the bomb goes off.
-                </p>
-
-                <div class="grid-4">
-                    <div class="page-card">
-                        <div class="page-icon">🔫</div>
-                        <div class="page-name">Blocker Assassin</div>
-                        <div class="page-desc">Impact in hours, best resolver matched</div>
+            <div class="slide-header"><span class="section-badge capacites">CAPACITES</span><h2 class="slide-title">Exigences de Capacites Financieres</h2></div>
+            <div class="content-split">
+                <div>
+                    <div class="grid-2 mb-1">
+                        <div class="card">
+                            <div class="card-title" style="color: var(--accent-green);">Fonds Necessaires</div>
+                            <p class="card-text">Disposer des fonds necessaires pour couvrir l'integralite du programme de travaux prevu.</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-title" style="color: var(--accent-blue);">Plan de Financement</div>
+                            <p class="card-text">Presenter un plan de financement complet avec justificatifs (pour les concessions).</p>
+                        </div>
                     </div>
-                    <div class="page-card">
-                        <div class="page-icon">💥</div>
-                        <div class="page-name">What Breaks If</div>
-                        <div class="page-desc">"If John is sick, here's what breaks"</div>
+                    <div class="warning-box">
+                        <div class="warning-box-title">Filtre Qualitatif Majeur</div>
+                        <p>Ces exigences constituent un filtre qui devrait reduire significativement les demandes <strong>speculatives</strong> (obtention de titres dans le but de les revendre).</p>
                     </div>
-                    <div class="page-card">
-                        <div class="page-icon">🛡️</div>
-                        <div class="page-name">Shock Absorber</div>
-                        <div class="page-desc">Instant reallocation playbooks</div>
-                    </div>
-                    <div class="page-card">
-                        <div class="page-icon">📬</div>
-                        <div class="page-name">Waiting On Inbox</div>
-                        <div class="page-desc">Nothing falls through cracks</div>
+                    <div class="info-box mt-1">
+                        <div class="info-box-title">Impact sur les PME</div>
+                        <p>Risque de constituer une <strong>barriere a l'entree</strong> pour les petites entreprises ou les nouveaux entrants dans le secteur minier.</p>
                     </div>
                 </div>
-
-                <div class="highlight-box mt-3">
-                    <div class="highlight-box-title">Cascade Simulation Example</div>
-                    <p><strong>"What Breaks If"</strong> answers questions like: "If our lead developer is out for 2 weeks, which deliverables are at risk, what's the cascade effect, and who can cover?" - <em>in seconds, not hours of manual analysis.</em></p>
-                </div>
-
-                <div class="tip">
-                    <div class="tip-title">Resource Shock Absorber</div>
-                    <p>When someone is suddenly unavailable, get instant handover playbooks with skill-based matching. Eliminates <strong>25-40 minutes per incident</strong> of scrambling.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 6: Predictive Intelligence -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge">PREDICTIVE INTELLIGENCE</span>
-                    <h2 class="slide-title">See Around Corners</h2>
-                </div>
-
-                <p class="mb-3" style="color: var(--text-secondary); font-size: 1.1rem;">
-                    Act on insights your competitors can't see.
-                </p>
-
-                <div class="grid-3">
-                    <div class="page-card">
-                        <div class="page-icon">🎯</div>
-                        <div class="page-name">Predictions</div>
-                        <div class="page-desc">ML-powered ticket duration & sprint risk forecasting</div>
-                    </div>
-                    <div class="page-card">
-                        <div class="page-icon">🎯</div>
-                        <div class="page-name">Strategic Gap</div>
-                        <div class="page-desc">Stated strategy vs. actual execution comparison</div>
-                    </div>
-                    <div class="page-card">
-                        <div class="page-icon">🧿</div>
-                        <div class="page-name">Sixth Sense</div>
-                        <div class="page-desc">Invisible dynamics detection, conflict prediction</div>
-                    </div>
-                </div>
-
-                <div class="grid-2 mt-3">
-                    <div class="info">
-                        <div class="info-title">Strategic Gap Analysis</div>
-                        <p>Compares what leadership <em>says</em> is priority vs. what the team is <em>actually</em> working on. Finds misalignment before it becomes a crisis.</p>
-                    </div>
-                    <div class="tip">
-                        <div class="tip-title">Sixth Sense Detection</div>
-                        <p>Uses pattern recognition to identify team dynamics that aren't visible in traditional metrics - predicting conflicts and collaboration issues.</p>
+                <div class="chart-container">
+                    <div class="chart-title">Criteres d'Evaluation des Demandes</div>
+                    <div class="chart-wrapper radar">
+                        <canvas id="chart-radar"></canvas>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 7: Daily Operations -->
+        <!-- ===== SLIDE 12: MODERNISATION ===== -->
         <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge">DAILY OPERATIONS</span>
-                    <h2 class="slide-title">Arrive Prepared, Leave Nothing Forgotten</h2>
-                </div>
-
-                <p class="mb-3" style="color: var(--text-secondary); font-size: 1.1rem;">
-                    Everything you need to know in 2 minutes.
-                </p>
-
-                <div class="grid-4">
-                    <div class="page-card">
-                        <div class="page-icon">🌅</div>
-                        <div class="page-name">Good Morning</div>
-                        <div class="page-desc">Personalized daily briefing</div>
+            <div class="slide-header"><span class="section-badge modern">MODERN</span><h2 class="slide-title">Modernisation et Numerisation</h2></div>
+            <div class="content-split">
+                <div>
+                    <div class="card-title mb-1">Evolution du Systeme d'Enregistrement</div>
+                    <div class="dataflow-container" style="flex-direction: column;">
+                        <div class="dataflow-box" style="width: 100%; border-color: var(--accent-red); background: rgba(239, 68, 68, 0.05);">ANCIEN SYSTEME<br/><small>Registres a souche (A, B, C, D)</small></div>
+                        <span class="dataflow-arrow" style="font-size: 2rem;">&#8595; &#8595; &#8595;</span>
+                        <div class="dataflow-box highlight" style="width: 100%;">NOUVEAU SYSTEME<br/><small>Registre special unique + Cartes numeriques</small></div>
                     </div>
-                    <div class="page-card">
-                        <div class="page-icon">⚡</div>
-                        <div class="page-name">Daily Action</div>
-                        <div class="page-desc">Today's critical actions & follow-ups</div>
-                    </div>
-                    <div class="page-card">
-                        <div class="page-icon">🎖️</div>
-                        <div class="page-name">Scrum Master HQ</div>
-                        <div class="page-desc">Sprint intelligence & AI coaching</div>
-                    </div>
-                    <div class="page-card">
-                        <div class="page-icon">📋</div>
-                        <div class="page-name">Reports</div>
-                        <div class="page-desc">One-click export to PDF/Excel</div>
+                    <div class="critical-box mt-1">
+                        <div class="critical-box-title">Article 4 Supprime</div>
+                        <p>Le systeme des 4 registres a souche est abandonne. Le nouveau systeme d'enregistrement informatise n'est <strong>pas encore completement defini</strong>.</p>
                     </div>
                 </div>
-
-                <div class="highlight-box mt-3">
-                    <div class="highlight-box-title">Good Morning Dashboard</div>
-                    <p>Opens with time-of-day personalization. Shows you exactly what changed overnight, what needs attention today, and priorities ranked by impact. <strong>Replaces 45 minutes of morning context-gathering with 5 minutes.</strong></p>
-                </div>
-
-                <div class="info">
-                    <div class="info-title">Daily Action Intelligence</div>
-                    <p>Consolidates: forgotten follow-ups, blocked items needing escalation, promises made that need delivery, and context from multiple sources. <strong>Eliminates cognitive overhead.</strong></p>
-                </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 8: Next-Gen Features -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge">NEXT GENERATION</span>
-                    <h2 class="slide-title">The Future of Management</h2>
-                </div>
-
-                <p class="mb-3" style="color: var(--text-secondary); font-size: 1.1rem;">
-                    From "humans manage work" to "work manages itself."
-                </p>
-
-                <div class="grid-3">
-                    <div class="page-card">
-                        <div class="page-icon">🔮</div>
-                        <div class="page-name">The Oracle</div>
-                        <div class="page-desc">Pre-made decisions with one-click actions. "Do THIS now."</div>
+                <div>
+                    <div class="success-box mb-1">
+                        <div class="success-box-title">Cartes Topographiques Numeriques</div>
+                        <p>Passage aux cartes numeriques (echelles 1/50000, 1/100000) pour une gestion informatisee des perimetres miniers.</p>
                     </div>
-                    <div class="page-card">
-                        <div class="page-icon">🤖</div>
-                        <div class="page-name">Autonomous Agents</div>
-                        <div class="page-desc">Self-driving project management. Set intent, approve exceptions.</div>
+                    <div class="success-box mb-1">
+                        <div class="success-box-title">Copies Electroniques Obligatoires</div>
+                        <p>Pour les concessions, le dossier complet doit etre fourni en format electronique en plus du format papier.</p>
                     </div>
-                    <div class="page-card">
-                        <div class="page-icon">🌀</div>
-                        <div class="page-name">Project Weather</div>
-                        <div class="page-desc">Intuitive weather metaphor. "Stormy with clearing expected."</div>
+                    <div class="success-box mb-1">
+                        <div class="success-box-title">Fiche de Renseignements Standardisee</div>
+                        <p>Modele type incluant adresse, courriel, telephone avec engagement de mise a jour des coordonnees.</p>
                     </div>
-                </div>
-
-                <div class="tip mt-3">
-                    <div class="tip-title">The Oracle Revolution</div>
-                    <p>Instead of "here's your data, figure out what to do" - The Oracle says: <strong>"Send this message to John about the blocked task. Here's the pre-written text. One click to send."</strong> Eliminates 90% of PM decision fatigue.</p>
-                </div>
-
-                <div class="info">
-                    <div class="info-title">Autonomous Agents</div>
-                    <p>Paradigm shift: Set your project intent ("Ship feature X by March 15 with quality bar Y"). Agents detect drift, propose interventions, execute approved actions. <strong>Humans only needed for judgment calls.</strong></p>
-                </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 9: Time Savings -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge">ROI</span>
-                    <h2 class="slide-title">Quantified Time Savings</h2>
-                </div>
-
-                <table>
-                    <tr>
-                        <th>Activity</th>
-                        <th>Without Platform</th>
-                        <th>With Platform</th>
-                        <th>Savings</th>
-                    </tr>
-                    <tr>
-                        <td>Morning context gathering</td>
-                        <td>45 min/day</td>
-                        <td>5 min/day</td>
-                        <td><strong style="color: var(--accent-green);">40 min/day</strong></td>
-                    </tr>
-                    <tr>
-                        <td>1-on-1 meeting prep</td>
-                        <td>30 min/meeting</td>
-                        <td>2 min/meeting</td>
-                        <td><strong style="color: var(--accent-green);">4-8 h/week</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Blocker resolution</td>
-                        <td>45 min/day</td>
-                        <td>15 min/day</td>
-                        <td><strong style="color: var(--accent-green);">30 min/day</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Status report creation</td>
-                        <td>2 h/week</td>
-                        <td>10 min/week</td>
-                        <td><strong style="color: var(--accent-green);">1.8 h/week</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Crisis scrambling</td>
-                        <td>40 min/incident</td>
-                        <td>10 min/incident</td>
-                        <td><strong style="color: var(--accent-green);">30 min/incident</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Decision research</td>
-                        <td>30 min/decision</td>
-                        <td>2 min/decision</td>
-                        <td><strong style="color: var(--accent-green);">90% reduction</strong></td>
-                    </tr>
-                </table>
-
-                <div class="highlight-box mt-3">
-                    <div class="highlight-box-title">Total Impact</div>
-                    <p style="font-size: 1.2rem;"><strong>3-6 hours saved per manager per week</strong> = 150-300 hours per year per manager</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 10: Target Users -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge">TARGET USERS</span>
-                    <h2 class="slide-title">Built for Every Management Role</h2>
-                </div>
-
-                <div class="grid-3">
-                    <div class="persona-card">
-                        <div class="persona-icon">👔</div>
-                        <div class="persona-title">CEO / VP</div>
-                        <div class="persona-pages">Executive Cockpit, CEO Command Center</div>
-                        <div class="persona-benefit">Strategic visibility without meetings</div>
-                    </div>
-                    <div class="persona-card">
-                        <div class="persona-icon">🏗️</div>
-                        <div class="persona-title">Engineering Director</div>
-                        <div class="persona-pages">Team Workload, Autonomous Agents, What Breaks If</div>
-                        <div class="persona-benefit">Scale management across teams</div>
-                    </div>
-                    <div class="persona-card">
-                        <div class="persona-icon">📦</div>
-                        <div class="persona-title">Product Manager</div>
-                        <div class="persona-pages">Delivery Forecast, Scope Negotiator, The Oracle</div>
-                        <div class="persona-benefit">Ship on time with confidence</div>
-                    </div>
-                    <div class="persona-card">
-                        <div class="persona-icon">🎖️</div>
-                        <div class="persona-title">Scrum Master</div>
-                        <div class="persona-pages">Sprint Health, Scrum Master HQ, Blocker Assassin</div>
-                        <div class="persona-benefit">Run better sprints with less effort</div>
-                    </div>
-                    <div class="persona-card">
-                        <div class="persona-icon">👨‍💻</div>
-                        <div class="persona-title">Engineering Manager</div>
-                        <div class="persona-pages">Team Workload, Burnout Barometer, One-on-One Hub</div>
-                        <div class="persona-benefit">Protect and grow your team</div>
-                    </div>
-                    <div class="persona-card">
-                        <div class="persona-icon">📊</div>
-                        <div class="persona-title">Project Manager</div>
-                        <div class="persona-pages">Daily Action, Sixth Sense, Project Weather</div>
-                        <div class="persona-benefit">Never be surprised again</div>
+                    <div class="info-box">
+                        <div class="info-box-title">Benefices Attendus</div>
+                        <p>Archivage facilite, detection automatique des chevauchements, partage efficace entre services.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 11: Key Metrics -->
+        <!-- ===== SLIDE 13: DISPOSITIONS SUPPRIMEES ===== -->
         <div class="slide">
-            <div class="content-full text-center">
-                <div class="slide-header" style="justify-content: center; border: none;">
-                    <span class="section-badge">OUTCOMES</span>
-                    <h2 class="slide-title">Measurable Results</h2>
-                </div>
-
-                <div class="grid-4 mt-4">
-                    <div class="card">
-                        <div class="big-number">90%</div>
-                        <div class="card-title">Faster Decisions</div>
-                        <div class="card-text">Pre-made recommendations eliminate research time</div>
-                    </div>
-                    <div class="card">
-                        <div class="big-number">2-3w</div>
-                        <div class="card-title">Earlier Detection</div>
-                        <div class="card-text">Problems identified before they become crises</div>
-                    </div>
-                    <div class="card">
-                        <div class="big-number">50%</div>
-                        <div class="card-title">Fewer Meetings</div>
-                        <div class="card-text">Information always available, no status updates needed</div>
-                    </div>
-                    <div class="card">
-                        <div class="big-number">15-20%</div>
-                        <div class="card-title">Productivity Gain</div>
-                        <div class="card-text">Cognitive overhead elimination</div>
-                    </div>
-                </div>
-
-                <div class="info mt-4" style="max-width: 800px; margin-left: auto; margin-right: auto;">
-                    <div class="info-title">Early Burnout Detection</div>
-                    <p>Behavioral anomalies identified before visible signs. <strong>Prevents turnover</strong> - the most expensive management failure.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 12: Implementation -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge">IMPLEMENTATION</span>
-                    <h2 class="slide-title">Easy to Deploy, Zero Training Required</h2>
-                </div>
-
+            <div class="slide-header"><span class="section-badge supprime">SUPPRIME</span><h2 class="slide-title">Dispositions Supprimees & Points en Suspens</h2></div>
+            <div class="content-full">
                 <div class="grid-2">
                     <div>
-                        <h3 class="mb-3">Quick Setup</h3>
-                        <ul class="feature-list">
-                            <li><strong>Data Source:</strong> Connects directly to Jira</li>
-                            <li><strong>Setup Time:</strong> Under 1 hour</li>
-                            <li><strong>Training:</strong> Self-explanatory interfaces</li>
-                            <li><strong>Security:</strong> Read-only Jira access</li>
-                            <li><strong>Data:</strong> Stays local, no cloud dependency</li>
-                        </ul>
+                        <div class="critical-box" style="padding: 1.5rem;">
+                            <div class="critical-box-title">Article 4 Ancien - SUPPRIME</div>
+                            <p style="margin-top: 0.6rem;">Systeme des 4 registres a souche :</p>
+                            <ul class="feature-list" style="margin-top: 0.8rem;">
+                                <li><strong>Registre A</strong> - Autorisations de prospection</li>
+                                <li><strong>Registre B</strong> - Permis de recherche</li>
+                                <li><strong>Registre C</strong> - Concessions d'exploitation</li>
+                                <li><strong>Registre D</strong> - Cessions, locations, abandons</li>
+                            </ul>
+                        </div>
                     </div>
                     <div>
-                        <h3 class="mb-3">No Disruption</h3>
+                        <div class="warning-box" style="padding: 1.5rem;">
+                            <div class="warning-box-title">TITRE IV - Contenu Non Defini</div>
+                            <p style="margin-top: 0.6rem;"><strong>"Des delais d'etude des demandes de titres miniers"</strong></p>
+                            <p style="margin-top: 0.6rem;">Ce nouveau titre est annonce mais son contenu n'est pas encore arrete. Delais proposes :</p>
+                            <ul class="feature-list" style="margin-top: 0.8rem;">
+                                <li>Prospection : <strong>30 jours</strong></li>
+                                <li>Permis de recherche : <strong>60 jours</strong></li>
+                                <li>Concession d'exploitation : <strong>120 jours</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container mt-2">
+                    <div class="chart-title">Delais d'Etude Proposes (en jours)</div>
+                    <div class="chart-wrapper bar-horizontal">
+                        <canvas id="chart-delais"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SLIDE 14: IMPACT OPERATEURS ===== -->
+        <div class="slide">
+            <div class="slide-header"><span class="section-badge impact">IMPACT</span><h2 class="slide-title">Impact sur les Operateurs Miniers</h2></div>
+            <div class="content-split">
+                <div>
+                    <table>
+                        <tr><th>Nature de la Charge</th><th>Niveau</th><th>Frequence</th></tr>
+                        <tr><td>Constitution des dossiers</td><td><span class="tag tag-orange">Moderee</span></td><td>Chaque demande</td></tr>
+                        <tr><td>Attestations fiscales</td><td><span class="tag tag-green">Faible</span></td><td>Chaque demande</td></tr>
+                        <tr><td>Validation bureaux/labos</td><td><span class="tag tag-red">Elevee</span></td><td>Concessions</td></tr>
+                        <tr><td>Constitution equipe technique</td><td><span class="tag tag-red">Elevee</span></td><td>Permis/Concessions</td></tr>
+                        <tr><td>Copies electroniques</td><td><span class="tag tag-green">Faible</span></td><td>Concessions</td></tr>
+                    </table>
+                    <div class="success-box mt-1">
+                        <div class="success-box-title">Avantages pour les Operateurs Serieux</div>
                         <ul class="feature-list">
-                            <li>Works with your existing Jira setup</li>
-                            <li>No workflow changes required</li>
-                            <li>No team onboarding needed</li>
-                            <li>Value visible from day one</li>
-                            <li>Scales with your organization</li>
+                            <li>Meilleure selection = moins de concurrence deloyale</li>
+                            <li>Previsibilite accrue (si delais definis)</li>
+                            <li>Securite juridique renforcee</li>
                         </ul>
                     </div>
                 </div>
-
-                <div class="tip mt-4">
-                    <div class="tip-title">The Promise</div>
-                    <p>Your teams keep using Jira exactly as they do today. <strong>Only managers see the intelligence layer.</strong> No change management, no adoption curve, no training budget.</p>
+                <div class="chart-container">
+                    <div class="chart-title">Repartition de l'Impact Global</div>
+                    <div class="chart-wrapper pie">
+                        <canvas id="chart-impact"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 13: Summary -->
+        <!-- ===== SLIDE 15: RECOMMANDATIONS ===== -->
         <div class="slide">
-            <div class="content-full text-center">
-                <h1 class="hero-title" style="font-size: 3.5rem;">Built for Managers Who Are Tired<br/>of Dashboards That Don't Help</h1>
-
-                <p class="hero-subtitle">
-                    Stop showing problems. Start solving them.
-                </p>
-
-                <div class="grid-3 mt-4">
-                    <div class="card">
-                        <span class="card-icon">🎯</span>
-                        <div class="card-title">Actionable</div>
-                        <p class="card-text">Every screen answers "what should I do?" not "what's happening?"</p>
+            <div class="slide-header"><span class="section-badge impact">SYNTHESE</span><h2 class="slide-title">Recommandations & Conclusion</h2></div>
+            <div class="content-full">
+                <div class="grid-2">
+                    <div class="card" style="border-left: 4px solid var(--accent-blue);">
+                        <div class="card-title" style="color: var(--accent-blue);">1. Finaliser le Titre IV sur les Delais</div>
+                        <p class="card-text">Definir des delais realistes mais contraignants pour le traitement des demandes. Prevoir les consequences en cas de depassement (acceptation tacite?).</p>
                     </div>
-                    <div class="card">
-                        <span class="card-icon">⚡</span>
-                        <div class="card-title">Proactive</div>
-                        <p class="card-text">See problems 2-3 weeks before they become crises</p>
+                    <div class="card" style="border-left: 4px solid var(--accent-green);">
+                        <div class="card-title" style="color: var(--accent-green);">2. Preciser le Systeme d'Enregistrement</div>
+                        <p class="card-text">Decrire le nouveau systeme informatise remplacant les registres a souche et definir les modalites de delivrance des accuses de reception.</p>
                     </div>
-                    <div class="card">
-                        <span class="card-icon">🤖</span>
-                        <div class="card-title">Intelligent</div>
-                        <p class="card-text">AI-powered recommendations, not just data visualization</p>
+                    <div class="card" style="border-left: 4px solid var(--accent-orange);">
+                        <div class="card-title" style="color: var(--accent-orange);">3. Prevoir des Mesures Transitoires</div>
+                        <p class="card-text">Accorder un delai d'adaptation raisonnable aux operateurs pour se conformer aux nouvelles exigences de capacites techniques et financieres.</p>
+                    </div>
+                    <div class="card" style="border-left: 4px solid var(--accent-purple);">
+                        <div class="card-title" style="color: var(--accent-purple);">4. Simplification pour les PME</div>
+                        <p class="card-text">Prevoir des allegements ou accompagnements specifiques pour les petites et moyennes entreprises minieres afin d'eviter les barrieres excessives.</p>
                     </div>
                 </div>
-
-                <div class="highlight-box mt-4" style="max-width: 600px; margin-left: auto; margin-right: auto;">
-                    <div class="highlight-box-title">The Bottom Line</div>
-                    <p style="font-size: 1.2rem;"><strong>3-6 hours saved per week</strong><br/>
-                    <strong>90% faster decisions</strong><br/>
-                    <strong>50% fewer status meetings</strong></p>
+                <div class="info-box mt-2" style="text-align: center;">
+                    <div class="info-box-title" style="font-size: 1.2rem;">Conclusion Generale</div>
+                    <p style="font-size: 1.05rem; margin-top: 0.6rem;">La revision proposee constitue une <strong>modernisation substantielle</strong> du cadre reglementaire tunisien. Elle renforce les controles, ameliore la transparence et professionnalise le secteur minier. Son succes dependra de la capacite de l'administration a traiter efficacement les dossiers plus volumineux et de l'accompagnement des operateurs dans cette transition.</p>
+                </div>
+                <div style="text-align: center; margin-top: 1.5rem; color: var(--text-secondary); font-size: 1rem;">
+                    <strong>Direction Generale des Mines</strong> | Republique Tunisienne | 2024
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 14: CTA -->
-        <div class="slide">
-            <div class="content-full text-center">
-                <h1 class="hero-title">Ready to Transform<br/>Your Project Management?</h1>
-
-                <p class="hero-subtitle">
-                    From reactive data analysis to proactive decision automation.<br/>
-                    Your managers will thank you.
-                </p>
-
-                <div class="grid-3 mt-4" style="max-width: 900px; margin-left: auto; margin-right: auto;">
-                    <div class="stat-card">
-                        <div class="stat-value">20+</div>
-                        <div class="stat-label">Intelligence Dashboards</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value">&lt;1h</div>
-                        <div class="stat-label">Setup Time</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value">Day 1</div>
-                        <div class="stat-label">Value Visible</div>
-                    </div>
-                </div>
-
-                <div class="tip mt-4" style="max-width: 600px; margin-left: auto; margin-right: auto;">
-                    <div class="tip-title">Next Steps</div>
-                    <p>Schedule a demo to see the platform in action with your actual Jira data.</p>
-                </div>
-            </div>
-        </div>
     </main>
 
-    <nav>
-        <button class="btn-secondary" onclick="prevSlide()">← Previous</button>
-        <button class="btn-primary" onclick="nextSlide()">Next →</button>
-    </nav>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
 
     <script>
-        let currentSlide = 0;
+        // Slide Navigation
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
+        let currentSlide = 0;
 
-        document.getElementById('total').textContent = totalSlides;
+        document.getElementById('total-slides').textContent = totalSlides;
 
-        function updateSlide() {
-            slides.forEach((slide, index) => {
-                slide.classList.remove('active', 'prev');
-                if (index === currentSlide) {
-                    slide.classList.add('active');
-                } else if (index < currentSlide) {
-                    slide.classList.add('prev');
-                }
-            });
-
-            document.getElementById('current').textContent = currentSlide + 1;
-            document.getElementById('progress').style.width = ((currentSlide + 1) / totalSlides * 100) + '%';
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            slides[currentSlide].classList.add('prev');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides.forEach(s => s.classList.remove('prev'));
+            slides[currentSlide].classList.add('active');
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+            document.getElementById('progress-fill').style.width = ((currentSlide + 1) / totalSlides * 100) + '%';
         }
 
-        function nextSlide() {
-            if (currentSlide < totalSlides - 1) {
-                currentSlide++;
-                updateSlide();
-            }
-        }
+        function nextSlide() { showSlide(currentSlide + 1); }
+        function prevSlide() { showSlide(currentSlide - 1); }
 
-        function prevSlide() {
-            if (currentSlide > 0) {
-                currentSlide--;
-                updateSlide();
-            }
-        }
-
-        // Keyboard navigation
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ') {
-                e.preventDefault();
-                nextSlide();
-            } else if (e.key === 'ArrowLeft') {
-                e.preventDefault();
-                prevSlide();
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        document.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') return;
+            nextSlide();
+        });
+
+        // Chart.js Global Config
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        Chart.defaults.font.size = 14;
+        Chart.defaults.color = '#475569';
+
+        // Palette sobre et chic
+        const chartColors = {
+            primary: '#2c3e50',
+            slate: '#4a5568',
+            sage: '#5a7a6b',
+            gold: '#b8860b',
+            rose: '#a35454',
+            teal: '#5a8a8a',
+            plum: '#6b5b7a',
+            stone: '#78716c',
+            navy: '#34495e'
+        };
+
+        // Chart 1: Types de Titres Miniers (Doughnut sobre)
+        new Chart(document.getElementById('chart-types'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Prospection', 'Permis Recherche', 'Concessions', 'Cession/Location'],
+                datasets: [{
+                    data: [15, 35, 40, 10],
+                    backgroundColor: [
+                        chartColors.teal,
+                        chartColors.slate,
+                        chartColors.sage,
+                        chartColors.plum
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#ffffff',
+                    hoverOffset: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '55%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 15,
+                            usePointStyle: true,
+                            pointStyle: 'circle',
+                            font: { size: 12, weight: '500' },
+                            color: '#4a5568'
+                        }
+                    }
+                }
             }
         });
 
-        // Touch navigation
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        document.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
+        // Chart 2: Documents Requis Comparaison (Bar sobre)
+        new Chart(document.getElementById('chart-docs'), {
+            type: 'bar',
+            data: {
+                labels: ['Prospection', 'Permis Recherche', 'Concession'],
+                datasets: [
+                    {
+                        label: 'Decision 2004',
+                        data: [5, 5, 6],
+                        backgroundColor: '#d4b896',
+                        borderColor: '#b8860b',
+                        borderWidth: 1,
+                        borderRadius: 4
+                    },
+                    {
+                        label: 'Nouvelle Decision',
+                        data: [7, 12, 14],
+                        backgroundColor: '#8faa9a',
+                        borderColor: '#5a7a6b',
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            padding: 15,
+                            usePointStyle: true,
+                            font: { size: 12, weight: '500' },
+                            color: '#4a5568'
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 16,
+                        grid: { color: 'rgba(0,0,0,0.04)' },
+                        ticks: { font: { size: 11 }, color: '#6b7280' }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { font: { size: 11, weight: '500' }, color: '#4a5568' }
+                    }
+                }
+            }
         });
 
-        document.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            if (touchStartX - touchEndX > 50) nextSlide();
-            if (touchEndX - touchStartX > 50) prevSlide();
+        // Chart 3: Radar Criteres (sobre)
+        new Chart(document.getElementById('chart-radar'), {
+            type: 'radar',
+            data: {
+                labels: ['Transparence', 'Securite', 'Efficacite', 'Accessibilite', 'Modernite'],
+                datasets: [{
+                    label: 'Score /10',
+                    data: [9, 8, 6, 5, 8],
+                    borderColor: chartColors.slate,
+                    backgroundColor: 'rgba(74, 85, 104, 0.1)',
+                    pointBackgroundColor: chartColors.slate,
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 5,
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 10,
+                        ticks: {
+                            stepSize: 2,
+                            font: { size: 10 },
+                            backdropColor: 'transparent',
+                            color: '#9ca3af'
+                        },
+                        pointLabels: {
+                            font: { size: 12, weight: '500' },
+                            color: '#4a5568'
+                        },
+                        grid: { color: 'rgba(0, 0, 0, 0.06)' },
+                        angleLines: { color: 'rgba(0, 0, 0, 0.06)' }
+                    }
+                }
+            }
+        });
+
+        // Chart 4: Delais Proposes (Horizontal Bar sobre)
+        new Chart(document.getElementById('chart-delais'), {
+            type: 'bar',
+            data: {
+                labels: ['Prospection', 'Permis Recherche', 'Concession'],
+                datasets: [{
+                    label: 'Jours',
+                    data: [30, 60, 120],
+                    backgroundColor: [
+                        '#8faa9a',
+                        '#7a8fa0',
+                        '#9a8fa5'
+                    ],
+                    borderColor: [chartColors.sage, chartColors.slate, chartColors.plum],
+                    borderWidth: 1,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 150,
+                        grid: { color: 'rgba(0,0,0,0.04)' },
+                        ticks: {
+                            callback: value => value + ' j',
+                            font: { size: 11 },
+                            color: '#6b7280'
+                        }
+                    },
+                    y: {
+                        grid: { display: false },
+                        ticks: { font: { size: 12, weight: '500' }, color: '#4a5568' }
+                    }
+                }
+            }
+        });
+
+        // Chart 5: Impact Operateurs (Pie sobre)
+        new Chart(document.getElementById('chart-impact'), {
+            type: 'pie',
+            data: {
+                labels: ['Couts additionnels', 'Delais prolonges', 'Barrieres PME', 'Avantages'],
+                datasets: [{
+                    data: [30, 25, 20, 25],
+                    backgroundColor: [
+                        '#b8a0a0',
+                        '#d4c4a0',
+                        '#a0a0b8',
+                        '#a0b8a8'
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#ffffff',
+                    hoverOffset: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 12,
+                            usePointStyle: true,
+                            pointStyle: 'circle',
+                            font: { size: 11, weight: '500' },
+                            color: '#4a5568'
+                        }
+                    }
+                }
+            }
         });
     </script>
 </body>
-
 </html>
